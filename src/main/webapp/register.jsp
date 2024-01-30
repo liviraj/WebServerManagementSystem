@@ -39,7 +39,7 @@ function validation() {
 <body>
 
 <form name="registerform" action="LoginRegisterController" method="post" >
-<center><h1>Employee Maintanance System</h1></center>
+<center><h1>Web Server Management System</h1></center>
 <div class="container">
 	<center><h2>Register</h2></center>
 		<div style="padding-left: 415px; padding-right: 374px;">

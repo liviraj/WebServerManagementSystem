@@ -1,12 +1,12 @@
-package com.gms.service;
+package com.wms.service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import com.gms.dbconnection.DbConnection;
-import com.gms.model.BeenLogin;
+import com.wms.dbconnection.DbConnection;
+import com.wms.model.BeenLogin;
 
 public class LoginServiceEMS {
 

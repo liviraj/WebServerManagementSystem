@@ -1,4 +1,4 @@
-package com.gms.dbconnection;
+package com.wms.dbconnection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class DbConnection {
 	static Connection connection=null;
 	static String className="com.mysql.jdbc.Driver";
-	static String url="jdbc:mysql://localhost:3306/gms";
+	static String url="jdbc:mysql://localhost:3306/wms";
 	static String root="root";
 	static String password="Javaraj@007";
 

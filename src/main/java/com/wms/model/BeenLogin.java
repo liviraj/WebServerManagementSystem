@@ -1,4 +1,4 @@
-package com.gms.model;
+package com.wms.model;
 
 /**
  * Login data beens

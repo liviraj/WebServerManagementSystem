@@ -19,7 +19,7 @@ h1{
 </head>
 <body>
 <form action="LoginHomeController" method="post">
-<center><h1>Grocery Shop Management System</h1></center>
+<center><h1>Web Server Management System</h1></center>
 	
 	<center><h2>Login</h2>
 	<center><span style="color: red">${msg}</span></center>

@@ -1,4 +1,4 @@
-package com.gms.controller;
+package com.wms.controller;
 
 import java.io.IOException;
 

@@ -1,4 +1,5 @@
-package com.gms.controller;
+package com.wms.controller;
+
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -14,25 +15,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.gms.model.GroceryBeen;
-import com.gms.service.GroceryService;
+import com.wms.model.ServerBeen;
+import com.wms.service.ServerService;
 
-@WebServlet("/GroceryController")
-public class GroceryController extends HttpServlet {
+@WebServlet("/ServerController")
+public class ServerController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String registerGrocery = "registergroocery.jsp";
-	private static final String viewGrocery = "viewegrocery.jsp";
+	private static final String registerServer = "registerserver.jsp";
+	private static final String viewServer = "vieweserver.jsp";
 	private static final String login = "login.jsp";
 	RequestDispatcher requestDispatcher = null;
-	
-	public GroceryController() {
+
+	public ServerController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@Override
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String check = (String) session.getAttribute("username");
 		String action = request.getParameter("action");
@@ -40,7 +41,7 @@ public class GroceryController extends HttpServlet {
 		if (action.equals("register")) {
 			if (check != null) {
 				request.setAttribute("name", "save");
-				navigation = registerGrocery;
+				navigation = registerServer;
 			} else {
 				requestDispatcher = request.getRequestDispatcher(login);
 			}
@@ -48,17 +49,17 @@ public class GroceryController extends HttpServlet {
 			navigation = "home.jsp";
 		} else if (action.equals("update")) {
 			if (check != null) {
-				GroceryService groceryService = new GroceryService();
-				GroceryBeen groceryBeen = new GroceryBeen();
+				ServerService serverService = new ServerService();
+				ServerBeen serverBeen = new ServerBeen();
 				int id = Integer.parseInt(request.getParameter("id"));
 				try {
-					groceryBeen = groceryService.getGroceryById(id);
+					serverBeen = serverService.getServerById(id);
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
 				}
 				request.setAttribute("name", "update");
-				request.setAttribute("details", groceryBeen);
-				navigation = registerGrocery;
+				request.setAttribute("details", serverBeen);
+				navigation = registerServer;
 			} else {
 				requestDispatcher = request.getRequestDispatcher(login);
 			}
@@ -66,20 +67,20 @@ public class GroceryController extends HttpServlet {
 			String confirm = request.getParameter("confirm");
 			if (check != null) {
 				if (!"false".equals(confirm)) {
-					GroceryService groceryService = new GroceryService();
+					ServerService serverService = new ServerService();
 					int id = Integer.parseInt(request.getParameter("id"));
 					try {
-						int reult = groceryService.deleteGrocery(id);
+						int reult = serverService.deleteServer(id);
 						if (reult == 1) {
-							ArrayList<GroceryBeen> groceryBeens = new ArrayList<GroceryBeen>();
-							GroceryService groceryService2 = new GroceryService();
+							ArrayList<ServerBeen> serverList = new ArrayList<ServerBeen>();
+							ServerService serverService2 = new ServerService();
 							try {
-								groceryBeens = groceryService2.getGrocery2();
+								serverList = serverService2.getServer2();
 							} catch (ClassNotFoundException e) {
 								e.printStackTrace();
 							}
-							request.setAttribute("details", groceryBeens);
-							navigation = viewGrocery;
+							request.setAttribute("details", serverList);
+							navigation = viewServer;
 						}
 					} catch (ClassNotFoundException e) {
 						e.printStackTrace();
@@ -90,25 +91,24 @@ public class GroceryController extends HttpServlet {
 					requestDispatcher = request.getRequestDispatcher(login);
 				}
 			}
-		}
-		else if (action.equals("add")) {
+		} else if (action.equals("add")) {
 			if (check != null) {
 				request.setAttribute("name", "save");
-				navigation = registerGrocery;
+				navigation = registerServer;
 			} else {
 				requestDispatcher = request.getRequestDispatcher(login);
 			}
 		} else {
 			if (check != null) {
-				ArrayList<GroceryBeen> groceryBeens = new ArrayList<GroceryBeen>();
-				GroceryService groceryService = new GroceryService();
+				ArrayList<ServerBeen> serverBeens = new ArrayList<ServerBeen>();
+				ServerService serverService = new ServerService();
 				try {
-					groceryBeens = groceryService.getGrocery();
+					serverBeens = serverService.getServer();
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
 				}
-				request.setAttribute("details", groceryBeens);
-				navigation = viewGrocery;
+				request.setAttribute("details", serverBeens);
+				navigation = viewServer;
 			} else {
 				requestDispatcher = request.getRequestDispatcher(login);
 			}
@@ -116,22 +116,22 @@ public class GroceryController extends HttpServlet {
 		requestDispatcher = request.getRequestDispatcher(navigation);
 		requestDispatcher.forward(request, response);
 	}
-	
+
 	@Override
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String check = (String) session.getAttribute("username");
 		String action = request.getParameter("submit");
-		ArrayList<GroceryBeen> arrayList = new ArrayList<GroceryBeen>();
+		ArrayList<ServerBeen> arrayList = new ArrayList<ServerBeen>();
 		if (action.equals("save")) {
 			if (check != null) {
-				GroceryBeen groceryBeen = new GroceryBeen();
-				GroceryService groceryService = new GroceryService();
-				String name = request.getParameter("name");
-				String metrixType = request.getParameter("metrixType");
-				int quantity = Integer.parseInt(request.getParameter("quantity"));
-				
+				ServerBeen serverBeen = new ServerBeen();
+				ServerService serverService = new ServerService();
+				String operatingSystem = request.getParameter("operatingSystem");
+				String serverName = request.getParameter("serverName");
+				String ram = request.getParameter("ram");
+
 				SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 				java.util.Date expirydateReq = null;
 				try {
@@ -141,39 +141,36 @@ public class GroceryController extends HttpServlet {
 					e.printStackTrace();
 				}
 				Date expirydate = new Date(expirydateReq.getTime());
-				
-				String itemType = request.getParameter("itemType");
-				int price = Integer.parseInt(request.getParameter("price"));
-				
-				
-				groceryBeen.setName(name);
-				groceryBeen.setMetrixType(metrixType);
-				groceryBeen.setQuantity(quantity);
-				groceryBeen.setExpiryDate(expirydate);
-				groceryBeen.setItemType(itemType);
-				groceryBeen.setPrice(price);
-				
-				String result = groceryService.nameCheck(name);
-				arrayList.add(groceryBeen);
+
+				String hardDiskSize = request.getParameter("hardDiskSize");
+				String availability = request.getParameter("availability");
+
+				serverBeen.setServerName(serverName);
+				serverBeen.setOperatingSystem(operatingSystem);
+				serverBeen.setRam(ram);
+				serverBeen.setExpiryDate(expirydate);
+				serverBeen.setHardDiskSize(hardDiskSize);
+				serverBeen.setAvailability(availability);
+
+				String result = serverService.nameCheck(operatingSystem);
+				arrayList.add(serverBeen);
 				if (result.equals("success")) {
 					request.setAttribute("name", "save");
-					request.setAttribute("msg", "Name Already Exist");
-					request.setAttribute("details", groceryBeen);
-					requestDispatcher = request
-							.getRequestDispatcher(registerGrocery);
+					request.setAttribute("msg", "Server Already Exist");
+					request.setAttribute("details", serverBeen);
+					requestDispatcher = request.getRequestDispatcher(registerServer);
 				} else {
-					int status = groceryService.insertGrocery(groceryBeen);
+					int status = serverService.insertServer(serverBeen);
 					if (status > 0) {
-						ArrayList<GroceryBeen> employeBeens = new ArrayList<GroceryBeen>();
-						GroceryService employeService2 = new GroceryService();
+						ArrayList<ServerBeen> employeBeens = new ArrayList<ServerBeen>();
+						ServerService employeService2 = new ServerService();
 						try {
-							employeBeens = employeService2.getGrocery2();
+							employeBeens = employeService2.getServer2();
 						} catch (ClassNotFoundException e) {
 							e.printStackTrace();
 						}
 						request.setAttribute("details", employeBeens);
-						requestDispatcher = request
-								.getRequestDispatcher(viewGrocery);
+						requestDispatcher = request.getRequestDispatcher(viewServer);
 					}
 				}
 			} else {
@@ -181,61 +178,61 @@ public class GroceryController extends HttpServlet {
 			}
 		} else if (action.equals("Cancel")) {
 			if (check != null) {
-				ArrayList<GroceryBeen> employeBeens = new ArrayList<GroceryBeen>();
-				GroceryService employeService = new GroceryService();
+				ArrayList<ServerBeen> serverBeens = new ArrayList<ServerBeen>();
+				ServerService serverService = new ServerService();
 				try {
-					employeBeens = employeService.getGrocery();
+					serverBeens = serverService.getServer();
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
 				}
-				request.setAttribute("details", employeBeens);
+				request.setAttribute("details", serverBeens);
 				// navigation=viewemp;
-				requestDispatcher = request.getRequestDispatcher(viewGrocery);
+				requestDispatcher = request.getRequestDispatcher(viewServer);
 			} else {
 				requestDispatcher = request.getRequestDispatcher(login);
 			}
 		} else {
 			if (check != null) {
-				GroceryBeen groceryBeen = new GroceryBeen();
-				GroceryService employeService = new GroceryService();
-				ArrayList<GroceryBeen> employeBeens = new ArrayList<GroceryBeen>();
-				int id = Integer.parseInt(request.getParameter("id"));
-				String name = request.getParameter("name");
-				String metrixType = request.getParameter("metrixType");
-				int quantity = Integer.parseInt(request.getParameter("quantity"));
-				
+				ServerBeen serverBeen = new ServerBeen();
+				ServerService serverService = new ServerService();
+				ArrayList<ServerBeen> serverBeens = new ArrayList<ServerBeen>();
+				int id = Integer.parseInt(request.getParameter("serverId"));
+				String operatingSystem = request.getParameter("operatingSystem");
+				String serverName = request.getParameter("serverName");
+				String ram = request.getParameter("ram");
+
 				SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 				java.util.Date expirydateReq = null;
 				try {
-					expirydateReq = dateFormat.parse(request.getParameter("expirydate"));
+					expirydateReq = dateFormat.parse(request.getParameter("expiryDate"));
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				Date expirydate = new Date(expirydateReq.getTime());
-				
-				String itemType = request.getParameter("itemType");
-				int price = Integer.parseInt(request.getParameter("price"));
-				
-				groceryBeen.setName(name);
-				groceryBeen.setMetrixType(metrixType);
-				groceryBeen.setQuantity(quantity);
-				groceryBeen.setExpiryDate(expirydate);
-				groceryBeen.setItemType(itemType);
-				groceryBeen.setPrice(price);
+
+				String hardDiskSize = request.getParameter("hardDiskSize");
+				String availability = request.getParameter("availability");
+
+				serverBeen.setServerName(serverName);
+				serverBeen.setOperatingSystem(operatingSystem);
+				serverBeen.setRam(ram);
+				serverBeen.setExpiryDate(expirydate);
+				serverBeen.setHardDiskSize(hardDiskSize);
+				serverBeen.setAvailability(availability);
 				try {
-					int status = employeService.updateGrocery(groceryBeen);
+					int status = serverService.updateServer(serverBeen);
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
 				}
 				try {
-					employeBeens = employeService.getGrocery2();
+					serverBeens = serverService.getServer2();
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
 				}
-				request.setAttribute("details", employeBeens);
+				request.setAttribute("details", serverBeens);
 				request.setAttribute("msg", "record updated successfully");
-				requestDispatcher = request.getRequestDispatcher(viewGrocery);
+				requestDispatcher = request.getRequestDispatcher(viewServer);
 			} else {
 				requestDispatcher = request.getRequestDispatcher(login);
 			}

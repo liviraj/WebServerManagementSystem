@@ -10,7 +10,7 @@
 <script src="bootstrap.min.js"></script>
 <script src="jquery.min.js"></script>
 
-<title>grocery registration</title>
+<title>server registration</title>
 <style type="text/css">
 h1{
 		background-color: gray;
@@ -23,12 +23,16 @@ if(val1=='' || val1==0)
  	$(document).ready(function(){
   		$('#sel1').val("---select---");
   		$('#sel2').val("---select---");
+  		$('#sel3').val("---select---");
+  		$('#sel4').val("---select---");
   	});
 	}
 else{
   	$(document).ready(function(){
-  		$('#sel1').val('${details.metrixType}');
-  		$('#sel2').val('${details.itemType}');
+  		$('#sel1').val('${details.operatingSystem}');
+  		$('#sel2').val('${details.ram}');
+  		$('#sel1').val('${details.hardDiskSize}');
+  		$('#sel2').val('${details.availability}');
   	});
 }
   </script>
@@ -80,53 +84,60 @@ else{
   </head>
 
 <body>
-<form action="GroceryController" method="post" name="rform" >
-<center><h1>Grocery Shop Management System</h1></center>
+<form action="ServerController" method="post" name="rform" >
+<center><h1>Web Server Management System</h1></center>
 <div class="container">
-<input  type="hidden" name="id" value="${details.idgroocery}">
-	<h2>Grocery Registration</h2>
+<input  type="hidden" name="id" value="${details.serverId}">
+	<h2>Server Registration</h2>
 	
 	<div class="col-xs-4">
 	<div>
-	<label>Name<span style="color: red">*</span></label><br><span style="color: red">${msg}</span>
+	<label>Server Name<span style="color: red">*</span></label><br><span style="color: red">${msg}</span>
 	<div id="errname">
 		<span style="color: red" id="sname"></span>
 	</div>
-	<input id="name" class="form-control" type="text" name="name" value="${details.name }"  placeholder="Enter item name">
+	<input id="serverName" class="form-control" type="text" name="serverName" value="${details.serverName }"  placeholder="Enter server name">
 	
 	
-	<br><br><label>Metrix Type<span style="color: red">*</span></label>
+	<br><br><label>Operating System<span style="color: red">*</span></label>
 	<div class="form-group">
 	<div id="errteam">
 		<span style="color: red" id="steam"></span>
 	</div>
-    <select  class="form-control" name="metrixType" id="sel1"  value="${details.metrixType}"> 
+    <select  class="form-control" name="operatingSystem" id="sel1"  value="${details.operatingSystem}"> 
         <option value="" hidden>---select---</option>
-        <option value="Count">Count</option>
-        <option value="KG">KG</option>
-        <option value="Litter">Litter</option>
+        <option value="Windows">Windows</option>
+        <option value="Linux">Linux</option>
+        <option value="RedHat">RedHat</option>
        </select>
       </div>
-	<br><label>Item Type<span style="color: red">*</span></label>
+	<br><label>RAM<span style="color: red">*</span></label>
 	<div class="form-group">
 	<div id="errplace">
 		<span style="color: red" id="splace"></span>
 	</div> 
-        <select  class="form-control" name="itemType" id="sel2"  value="${details.itemType}">
+        <select  class="form-control" name="ram" id="sel2"  value="${details.ram}">
         	<option value="" hidden>---select---</option>																																																																																																																																																																																																																																																																																																											>---select---</option>
-        	<option value="Snacks">Snacks</option>
-        	<option value="House Use">House Use</option>
-        	<option value="Entertainment">Entertainment</option>
-        	<option value="Nuts / Grains">Nuts / Grains</option>
-        	<option value="Others">Others</option>
+        	<option value="2 GB">2 GB</option>
+        	<option value="4 GB">4 GB</option>
+        	<option value="8 GB">8 GB</option>
+        	<option value="16 GB">16 GB</option>
+        	<option value="32 GB">32 GB</option>
         </select>
       </div>
-	<br><label>Quantity</label><span style="color: red">*</span>
-	<div class="form-group">
-	<div id="errsalary">
-		<span style="color: red" id="ssalary"></span>
-	</div>
-	<input id="quantity" class="form-control" type="number" name="quantity"  placeholder="enter quantity" value="${details.quantity}">
+	<br><div class="form-group">
+	<div id="errplace">
+		<span style="color: red" id="splace"></span>
+	</div> 
+        <select  class="form-control" name="hardDiskSize" id="sel3"  value="${details.hardDiskSize}">
+        	<option value="" hidden>---select---</option>																																																																																																																																																																																																																																																																																																											>---select---</option>
+        	<option value="128 GB">128 GB</option>
+        	<option value="256 GB">256 GB</option>
+        	<option value="512 GB">512 GB</option>
+        	<option value="1024 GB">1024 GB</option>
+        	<option value="2048 GB">2048 GB</option>
+        </select>
+      </div>
 	
 	<br><br>
 	
@@ -134,12 +145,22 @@ else{
 	<div id="errname">
 		<span style="color: red" id="sname"></span>
 	</div>
-	<input id="expiryDate" class="form-control" type="date" path="expiryDate" class= "date" name = "expiryDate" pattern="dd-MM-yyyy" />
+	<input id="expiryDate" class="form-control" type="date" path="expiryDate" class= "date" name = "expiryDate" pattern="dd-MM-yyyy"  value="${details.expiryDate}"/>
 	
 	<br><br>
 	
-	<label>Price ₹<span style="color: red">*</span></label><br><span style="color: red">${msg}</span>
-	<input id="price" class="form-control" type="number" name="price"  placeholder="enter price" value="${details.price}">
+	<div class="form-group">
+	<div id="errplace">
+		<span style="color: red" id="splace"></span>
+	</div> 
+        <select  class="form-control" name="availability" id="sel4"  value="${details.availability}">
+        	<option value="" hidden>---select---</option>																																																																																																																																																																																																																																																																																																											>---select---</option>
+        	<option value="Low">Low</option>
+        	<option value="Medium">Medium</option>
+        	<option value="High">High</option>
+        </select>
+      </div>
+      
 		<br>
 		<div class="col-xs-2">
 		<input  class="btn btn-info" type="submit" name="submit"  value="${name}" onclick="return validate()"></input>

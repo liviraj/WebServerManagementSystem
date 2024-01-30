@@ -16,8 +16,8 @@ h1{
 </style>
 </head>
 
-<body background="groocery.png">
-<center><h1>Grocery Shop Management System</h1></center>
+<body background="server_image.avif">
+<center><h1>Web Server Management System</h1></center>
 <div class="container">
 <div class="panel panel-success">
 <form name="logform" onsubmit="validate">

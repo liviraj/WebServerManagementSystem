@@ -20,7 +20,7 @@ h1{
 		var c=confirm("Are You Sure");
 		if(c==true)
 			{
-				location.href="GroceryController?action=delete&id="+idValue; 
+				location.href="ServerController?action=delete&id="+idValue; 
 			}/* else{
 				location.reload();
 			} */
@@ -30,9 +30,9 @@ h1{
 </head>
 <body>
 <div class="container">
-<center><h1>Grocery Shop Management System</h1></center>
+<center><h1>Web Server Management System</h1></center>
 	
-	<center><p><font size="5">View of Grocery Information</font></p></center>
+	<center><p><font size="5">View of Server Information</font></p></center>
 	<center><span style="color: red">${msg} </span></center>
 	<form action="LogoutController">
 				<input type="submit" name="submit" value="logout" style="position:relative; left: 1000px" class="btn btn-danger">
@@ -41,26 +41,26 @@ h1{
 	<center><table border="3" class="table">
 		<tr class="danger">
 		<th>Id</th>
-		<th>Grocery Name</th>
-		<th>Metrix Type</th>
-		<th>Quantity</th>
+		<th>Server Name</th>
+		<th>Operating System</th>
+		<th>RAM</th>
+		<th>Hard Disk Size</th>
+		<th>Availability</th>
 		<th>Expiry Date</th>
-		<th>Item Type</th>
-		<th>Price</th>
-		<th colspan="1"><a href="GroceryController?action=add">Add New</a></th>
+		<th colspan="1"><a href="ServerController?action=add">Add New</a></th>
 		</tr>
 			<c:forEach items="${details}" var="detail">
 			<tr>
-				<td><c:out value="${detail.idgroocery}"></c:out></td>
-				<td><c:out value="${detail.name}"></c:out></td>
-				<td><c:out value="${detail.metrixType}"></c:out></td>
-				<td><c:out value="${detail.quantity}"></c:out></td>
+				<td><c:out value="${detail.serverId}"></c:out></td>
+				<td><c:out value="${detail.serverName}"></c:out></td>
+				<td><c:out value="${detail.operatingSystem}"></c:out></td>
+				<td><c:out value="${detail.ram}"></c:out></td>
+				<td><c:out value="${detail.hardDiskSize}"></c:out></td>
+				<td><c:out value="${detail.availability}"></c:out></td>
 				<td><c:out value="${detail.expiryDate}"></c:out></td>
-				<td><c:out value="${detail.itemType}"></c:out></td>
-				<td><c:out value="${detail.price}"></c:out></td>
-				<td><a href="GroceryController?action=update&id=<c:out value="${detail.idgroocery}"/>"><button>Update</button></a>
-               <%-- <a href="GroceryController?action=delete&id=<c:out value="${detail.id}" />"><button onclick="msg1()">Delete</button></a></td> --%>
-			 <a><button onclick="msg1(${detail.idgroocery})">Delete</button></a></td> 
+				<td><a href="ServerController?action=update&id=<c:out value="${detail.serverId}"/>"><button>Update</button></a>
+               <%-- <a href="ServerController?action=delete&id=<c:out value="${detail.id}" />"><button onclick="msg1()">Delete</button></a></td> --%>
+			 <a><button onclick="msg1(${detail.serverId})">Delete</button></a></td> 
 			</tr>
 			</c:forEach>
 			</table></center></div>

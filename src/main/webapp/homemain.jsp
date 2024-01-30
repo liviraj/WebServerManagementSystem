@@ -16,8 +16,8 @@ h1{
 </style>
 </head>
 
-<body background="campus-placement_ifengzhong_com.png">
-<center><h1>Employee Maintanance System</h1></center>
+<body background="server_image.avif">
+<center><h1>Web Server Management System</h1></center>
 <form>
 <div class="container">
 <nav class="navbar navbar-default">  
@@ -26,8 +26,8 @@ h1{
 
 	<ul class="nav navbar-nav">
 	<li><a>Home</a></li>
-	<li><a href="EmployeeController?action=register">Register Employee Details</a></li>
-	<li><a href="EmployeeController?action=view">View Employee Details</a></li>
+	<li><a href="SeController?action=register">Register Server Details</a></li>
+	<li><a href="ServerController?action=view">View Server Details</a></li>
 	</ul>
 	</div>
 	</div>

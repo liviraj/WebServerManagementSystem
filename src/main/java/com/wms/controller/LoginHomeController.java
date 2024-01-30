@@ -1,4 +1,4 @@
-package com.gms.controller;
+package com.wms.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.gms.model.BeenLogin;
-import com.gms.model.GroceryBeen;
-import com.gms.service.GroceryService;
-import com.gms.service.LoginServiceEMS;
+import com.wms.model.BeenLogin;
+import com.wms.model.ServerBeen;
+import com.wms.service.ServerService;
+import com.wms.service.LoginServiceEMS;
 
 /**
  * Servlet implementation class LoginHomeController
@@ -25,7 +25,7 @@ public class LoginHomeController extends HttpServlet {
 	private static final String homemain = "homemain.jsp";
 	private static final String login = "login.jsp";
 	private static final String home = "home.jsp";
-	private static final String viewGrocery = "viewegrocery.jsp";
+	private static final String viewServer = "vieweserver.jsp";
 
 	RequestDispatcher requestDispatcher = null;
 
@@ -72,15 +72,15 @@ public class LoginHomeController extends HttpServlet {
 			session.setAttribute("username", username);
 			String check = (String) session.getAttribute("username");
 			if (check != null) {
-				ArrayList<GroceryBeen> groceryBeens = new ArrayList<GroceryBeen>();
-				GroceryService groceryService = new GroceryService();
+				ArrayList<ServerBeen> serverBeens = new ArrayList<ServerBeen>();
+				ServerService serverService = new ServerService();
 				try {
-					groceryBeens = groceryService.getGrocery();
+					serverBeens = serverService.getServer();
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
 				}
-				request.setAttribute("details", groceryBeens);
-				navigation = viewGrocery;
+				request.setAttribute("details", serverBeens);
+				navigation = viewServer;
 			} else {
 				requestDispatcher = request.getRequestDispatcher(login);
 			}

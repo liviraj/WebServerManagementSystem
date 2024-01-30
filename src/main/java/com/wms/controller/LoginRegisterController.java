@@ -1,4 +1,4 @@
-package com.gms.controller;
+package com.wms.controller;
 
 import java.io.IOException;
 
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.gms.model.BeenLogin;
-import com.gms.service.LoginServiceEMS;
+import com.wms.model.BeenLogin;
+import com.wms.service.LoginServiceEMS;
 
 /**
  * Servlet implementation class LoginRegisterController
