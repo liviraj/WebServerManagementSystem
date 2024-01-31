@@ -31,8 +31,8 @@ else{
   	$(document).ready(function(){
   		$('#sel1').val('${details.operatingSystem}');
   		$('#sel2').val('${details.ram}');
-  		$('#sel1').val('${details.hardDiskSize}');
-  		$('#sel2').val('${details.availability}');
+  		$('#sel3').val('${details.hardDiskSize}');
+  		$('#sel4').val('${details.availability}');
   	});
 }
   </script>
@@ -99,7 +99,7 @@ else{
 	<input id="serverName" class="form-control" type="text" name="serverName" value="${details.serverName }"  placeholder="Enter server name">
 	
 	
-	<br><br><label>Operating System<span style="color: red">*</span></label>
+	<br><label>Operating System<span style="color: red">*</span></label>
 	<div class="form-group">
 	<div id="errteam">
 		<span style="color: red" id="steam"></span>
@@ -125,7 +125,9 @@ else{
         	<option value="32 GB">32 GB</option>
         </select>
       </div>
-	<br><div class="form-group">
+	<br>
+	<label>Hard Disk Size<span style="color: red">*</span></label>
+	<div class="form-group">
 	<div id="errplace">
 		<span style="color: red" id="splace"></span>
 	</div> 
@@ -139,16 +141,16 @@ else{
         </select>
       </div>
 	
-	<br><br>
+	<br>
 	
 	<label>Expiry Date<span style="color: red">*</span></label><br><span style="color: red">${msg}</span>
 	<div id="errname">
 		<span style="color: red" id="sname"></span>
 	</div>
-	<input id="expiryDate" class="form-control" type="date" path="expiryDate" class= "date" name = "expiryDate" pattern="dd-MM-yyyy"  value="${details.expiryDate}"/>
+	<input id="expiryDate" class="form-control" type="date" path="expiryDate" class= "date" name="expiryDate" pattern="dd-MM-yyyy"  value="${details.expiryDate}"/>
 	
-	<br><br>
-	
+	<br>
+	<label>Availability<span style="color: red">*</span></label>
 	<div class="form-group">
 	<div id="errplace">
 		<span style="color: red" id="splace"></span>

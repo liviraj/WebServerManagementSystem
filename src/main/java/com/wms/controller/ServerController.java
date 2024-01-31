@@ -22,7 +22,7 @@ import com.wms.service.ServerService;
 public class ServerController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String registerServer = "registerserver.jsp";
-	private static final String viewServer = "vieweserver.jsp";
+	private static final String viewServer = "viewserver.jsp";
 	private static final String login = "login.jsp";
 	RequestDispatcher requestDispatcher = null;
 
@@ -132,10 +132,11 @@ public class ServerController extends HttpServlet {
 				String serverName = request.getParameter("serverName");
 				String ram = request.getParameter("ram");
 
-				SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 				java.util.Date expirydateReq = null;
 				try {
-					expirydateReq = dateFormat.parse(request.getParameter("expiryDate"));
+					String reqDate = request.getParameter("expiryDate");
+					expirydateReq = dateFormat.parse(reqDate);
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -152,7 +153,7 @@ public class ServerController extends HttpServlet {
 				serverBeen.setHardDiskSize(hardDiskSize);
 				serverBeen.setAvailability(availability);
 
-				String result = serverService.nameCheck(operatingSystem);
+				String result = serverService.nameCheck(serverName);
 				arrayList.add(serverBeen);
 				if (result.equals("success")) {
 					request.setAttribute("name", "save");
@@ -162,14 +163,14 @@ public class ServerController extends HttpServlet {
 				} else {
 					int status = serverService.insertServer(serverBeen);
 					if (status > 0) {
-						ArrayList<ServerBeen> employeBeens = new ArrayList<ServerBeen>();
+						ArrayList<ServerBeen> serverBeens = new ArrayList<ServerBeen>();
 						ServerService employeService2 = new ServerService();
 						try {
-							employeBeens = employeService2.getServer2();
+							serverBeens = employeService2.getServer2();
 						} catch (ClassNotFoundException e) {
 							e.printStackTrace();
 						}
-						request.setAttribute("details", employeBeens);
+						request.setAttribute("details", serverBeens);
 						requestDispatcher = request.getRequestDispatcher(viewServer);
 					}
 				}
@@ -196,7 +197,7 @@ public class ServerController extends HttpServlet {
 				ServerBeen serverBeen = new ServerBeen();
 				ServerService serverService = new ServerService();
 				ArrayList<ServerBeen> serverBeens = new ArrayList<ServerBeen>();
-				int id = Integer.parseInt(request.getParameter("serverId"));
+				int id = Integer.parseInt(request.getParameter("id"));
 				String operatingSystem = request.getParameter("operatingSystem");
 				String serverName = request.getParameter("serverName");
 				String ram = request.getParameter("ram");
@@ -213,7 +214,8 @@ public class ServerController extends HttpServlet {
 
 				String hardDiskSize = request.getParameter("hardDiskSize");
 				String availability = request.getParameter("availability");
-
+				
+				serverBeen.setServerId(id);
 				serverBeen.setServerName(serverName);
 				serverBeen.setOperatingSystem(operatingSystem);
 				serverBeen.setRam(ram);

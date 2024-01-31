@@ -8,15 +8,15 @@ import java.sql.Statement;
 import com.wms.dbconnection.DbConnection;
 import com.wms.model.BeenLogin;
 
-public class LoginServiceEMS {
+public class LoginService {
 
-	public String check(BeenLogin beenEMS) {
+	public String check(BeenLogin beenLogin) {
 		Connection con = null;
 		Statement st = null;
 		ResultSet rs = null;
 
-		String username = beenEMS.getUsername();
-		String password = beenEMS.getPassword();
+		String username = beenLogin.getUsername();
+		String password = beenLogin.getPassword();
 		try {
 			con = DbConnection.getConnection();
 			st = (Statement) con.createStatement();
@@ -33,14 +33,14 @@ public class LoginServiceEMS {
 		return "failed";
 	}
 
-	public int register(BeenLogin beenEMS) {
+	public int register(BeenLogin beenLogin) {
 
 		Connection con = null;
 		Statement st = null;
 		ResultSet rs = null;
 
-		String username = beenEMS.getUsername();
-		String password = beenEMS.getPassword();
+		String username = beenLogin.getUsername();
+		String password = beenLogin.getPassword();
 		int status = 0;
 		try {
 			con = DbConnection.getConnection();

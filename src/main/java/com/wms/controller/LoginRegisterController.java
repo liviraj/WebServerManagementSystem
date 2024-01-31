@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.wms.model.BeenLogin;
-import com.wms.service.LoginServiceEMS;
+import com.wms.service.LoginService;
 
 /**
  * Servlet implementation class LoginRegisterController
@@ -58,7 +58,7 @@ public class LoginRegisterController extends HttpServlet {
 		beenEMS.setUsername(username);
 		beenEMS.setPassword(password);
 
-		LoginServiceEMS loginServiceEMS = new LoginServiceEMS();
+		LoginService loginServiceEMS = new LoginService();
 		if (password.equals(password1)) {
 			int status = loginServiceEMS.register(beenEMS);
 			if (status == 1) {

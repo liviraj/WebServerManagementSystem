@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import com.wms.model.BeenLogin;
 import com.wms.model.ServerBeen;
 import com.wms.service.ServerService;
-import com.wms.service.LoginServiceEMS;
+import com.wms.service.LoginService;
 
 /**
  * Servlet implementation class LoginHomeController
@@ -25,7 +25,7 @@ public class LoginHomeController extends HttpServlet {
 	private static final String homemain = "homemain.jsp";
 	private static final String login = "login.jsp";
 	private static final String home = "home.jsp";
-	private static final String viewServer = "vieweserver.jsp";
+	private static final String viewServer = "viewserver.jsp";
 
 	RequestDispatcher requestDispatcher = null;
 
@@ -59,13 +59,13 @@ public class LoginHomeController extends HttpServlet {
 		String username = request.getParameter("uname");
 		String password = request.getParameter("psw");
 
-		BeenLogin beenEMS = new BeenLogin();
-		beenEMS.setUsername(username);
-		beenEMS.setPassword(password);
+		BeenLogin beenLogin = new BeenLogin();
+		beenLogin.setUsername(username);
+		beenLogin.setPassword(password);
 
-		LoginServiceEMS loginCheck = new LoginServiceEMS();
+		LoginService loginCheck = new LoginService();
 
-		String result = loginCheck.check(beenEMS);
+		String result = loginCheck.check(beenLogin);
 
 		if (result.equals("success")) {
 			HttpSession session = request.getSession();

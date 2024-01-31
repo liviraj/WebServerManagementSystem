@@ -45,7 +45,7 @@ public class ServerService {
 		try {
 			con = DbConnection.getConnection();
 			PreparedStatement ps = (PreparedStatement) con
-					.prepareStatement("select * from server where id='" + id + "'");
+					.prepareStatement("select * from server where serverId='" + id + "'");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				bean.setServerId(rs.getInt(1));
@@ -64,7 +64,7 @@ public class ServerService {
 
 	public int deleteServer(int id) throws ClassNotFoundException, SQLException {
 		int status = 0;
-		String query = "delete from server where id=" + id + "";
+		String query = "delete from server where serverId=" + id + "";
 		con = DbConnection.getConnection();
 		PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
 		status = ps.executeUpdate();
@@ -120,7 +120,7 @@ public class ServerService {
 		try {
 			con = DbConnection.getConnection();
 			PreparedStatement ps = (PreparedStatement) con.prepareStatement(
-					"update server set serverName=?,operatingSystem=?,ram=?,hardDiskSize=?,availability=?,expiryDate=?  where id='" + serverBeen.getServerId() + "'");
+					"update server set serverName=?,operatingSystem=?,ram=?,hardDiskSize=?,availability=?,expiryDate=?  where serverId='" + serverBeen.getServerId() + "'");
 			ps.setString(1, serverBeen.getServerName());
 			ps.setString(2, serverBeen.getOperatingSystem());
 			ps.setString(3, serverBeen.getRam());
@@ -134,14 +134,14 @@ public class ServerService {
 		return status;
 	}
 
-	public String nameCheck(String name) {
+	public String nameCheck(String serverName) {
 		Connection con = null;
 		Statement st = null;
 		ResultSet rs = null;
 		try {
 			con = DbConnection.getConnection();
 			st = (Statement) con.createStatement();
-			rs = st.executeQuery("select serverName from server where  name = '" + name + "'");
+			rs = st.executeQuery("select serverName from server where  serverName = '" + serverName + "'");
 			if (rs.next()) {
 				return "success";
 			}
